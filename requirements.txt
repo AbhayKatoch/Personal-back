@@ -30,3 +30,4 @@ langchain-groq
 gunicorn
 whitenoise
 django
+corsheaders
