@@ -27,7 +27,7 @@ class character_bot:
     def __init__(self, character_name, txt_path, prompt_style):
         self.character_name = character_name
         self.txt_path = Path(txt_path)
-        
+        print("text")
 
         self.loader = TextLoader(txt_path, encoding='utf-8')
         self.documents = self.loader.load()
@@ -43,7 +43,7 @@ class character_bot:
         self.retriever = self.vector_db.as_retriever()
 
         self.prompt = ChatPromptTemplate(prompt_style)
-
+        print("prompt")
         self.model = ChatGroq(
             model="llama-3.1-8b-instant",
             temperature=0.6
