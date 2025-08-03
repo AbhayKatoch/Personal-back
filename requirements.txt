@@ -19,6 +19,8 @@ google-generativeai
 langchain-huggingface
 transformers
 huggingface-hub
+sentence-transformers
+torch
 
 # Environment Variable Management
 python-dotenv
