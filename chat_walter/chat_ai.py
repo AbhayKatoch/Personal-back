@@ -31,16 +31,19 @@ class character_bot:
 
         self.loader = TextLoader(txt_path, encoding='utf-8')
         self.documents = self.loader.load()
+        print("loaded")
 
 
         self.text_spliter = RecursiveCharacterTextSplitter(chunk_size = 1000, chunk_overlap = 150)
         self.split = self.text_spliter.split_documents(self.documents)
 
-
+        print("spliteed")
         self.embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
         self.vector_db = FAISS.from_documents(self.split, self.embeddings)
         self.retriever = self.vector_db.as_retriever()
+
+        print("retrieved")
 
         self.prompt = ChatPromptTemplate.from_messages(prompt_style)
         print("prompt")
