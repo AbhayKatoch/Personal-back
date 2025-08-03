@@ -39,6 +39,7 @@ class character_bot:
 
         print("spliteed")
         self.embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+        print("embedded")
 
         self.vector_db = FAISS.from_documents(self.split, self.embeddings)
         self.retriever = self.vector_db.as_retriever()
