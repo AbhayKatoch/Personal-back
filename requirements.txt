@@ -30,4 +30,4 @@ langchain-groq
 gunicorn
 whitenoise
 django
-corsheaders
+django-cors-headers   
