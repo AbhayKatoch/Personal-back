@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com", "https://persona-chat-lac.vercel.app"]
 
 
 ROOT_URLCONF = 'chat.urls'
@@ -75,8 +75,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chat.wsgi.application'
-
-DEBUG = True
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
