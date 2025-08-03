@@ -42,7 +42,7 @@ class character_bot:
         self.vector_db = FAISS.from_documents(self.split, self.embeddings)
         self.retriever = self.vector_db.as_retriever()
 
-        self.prompt = ChatPromptTemplate(prompt_style)
+        self.prompt = ChatPromptTemplate.from_messages(prompt_style)
         print("prompt")
         self.model = ChatGroq(
             model="llama-3.1-8b-instant",
