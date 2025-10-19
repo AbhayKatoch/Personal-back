@@ -8,8 +8,7 @@ langchain_community
 
 # Hugging Face Integration
 langchain-huggingface
-sentence-transformers
-torch
+
 
 # Environment Variable Management
 python-dotenv
