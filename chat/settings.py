@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,9 +54,11 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com", "https://persona-chat-lac.vercel.app"]
 
+CORS_ALLOW_ALL_ORIGINS = False  # Security: turn off full open access
+CORS_ALLOWED_ORIGINS = [
+    "https://persona-chat-lac.vercel.app",   # your frontend domain
+]
 
 ROOT_URLCONF = 'chat.urls'
 
