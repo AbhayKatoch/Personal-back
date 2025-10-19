@@ -10,6 +10,10 @@ from dotenv import load_dotenv
 from pathlib import Path
 load_dotenv()
 
+GLOBAL_EMBEDDINGS = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
+
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
@@ -26,22 +30,28 @@ def format_chat_history(messages):
 class character_bot:
     def __init__(self, character_name, txt_path, prompt_style):
         self.character_name = character_name
+        self.prompt_style = prompt_style
         self.txt_path = Path(txt_path)
-        print("text")
 
-        self.loader = TextLoader(txt_path, encoding='utf-8')
-        self.documents = self.loader.load()
-        print("loaded")
+        index_dir = self.txt_path.parent
+        index_dir_str = str(self.txt_path.parent)
+        index_name = self.txt_path.stem
 
+        faiss_path = index_dir / f"{index_name}.faiss"
+        pkl_path = index_dir / f"{index_name}.pkl"
 
-        self.text_spliter = RecursiveCharacterTextSplitter(chunk_size = 1000, chunk_overlap = 150)
-        self.split = self.text_spliter.split_documents(self.documents)
+        if faiss_path.exists() and pkl_path.exists():
+            self.vector_db = FAISS.load_local(
+                folder_path=index_dir_str,
+                index_name=index_name,
+                embeddings=GLOBAL_EMBEDDINGS,
+                allow_dangerous_deserialization=True
 
-        print("spliteed")
-        self.embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-MiniLM-L3-v2")
-        print("embedded")
+            )
+        else:
+            raise FileNotFoundError(f"FAISS Files missing")
+        
 
-        self.vector_db = FAISS.from_documents(self.split, self.embeddings)
         self.retriever = self.vector_db.as_retriever()
 
         print("retrieved")
