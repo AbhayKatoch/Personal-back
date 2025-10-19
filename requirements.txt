@@ -2,18 +2,9 @@
 langchain
 langchain-core
 
-# OpenAI Integration
-langchain-openai
-openai
 
 langchain_community
 
-# Anthropic Integration
-langchain-anthropic
-
-# Google Gemini (PaLM) Integration
-langchain-google-genai
-google-generativeai
 
 # Hugging Face Integration
 langchain-huggingface
